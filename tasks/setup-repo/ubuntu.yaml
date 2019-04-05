@@ -1,0 +1,5 @@
+---
+- name: Configure repository
+  become: true
+  apt_repository:
+    repo: ppa:wireguard/wireguard

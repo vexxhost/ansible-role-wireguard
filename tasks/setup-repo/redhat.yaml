@@ -1,0 +1,10 @@
+---
+- name: Configure repository
+  become: true
+  yum_repository:
+    name: wireguard
+    description: WireGuard Repository
+    baseurl: https://copr-be.cloud.fedoraproject.org/results/jdoss/wireguard/epel-7-$basearch/
+    gpgkey: https://copr-be.cloud.fedoraproject.org/results/jdoss/wireguard/pubkey.gpg
+    gpgcheck: true
+    skip_if_unavailable: true

@@ -1,0 +1,17 @@
+[Interface]
+PrivateKey = {{ item.private_key }}
+Address = {{ item.address }}
+ListenPort = {{ item.port }}
+{% if 'post_up' in item %}
+PostUp = {{ item.post_up }}
+{% endif %}
+{% if 'post_down' in item %}
+PostDown = {{ item.post_down }}
+{% endif %}
+
+{% for peer in item.peers %}
+[Peer]
+PublicKey = {{ peer.public_key }}
+Endpoint = {{ peer.endpoint }}
+AllowedIPs = {{ peer.allowed_ips }}
+{% endfor %}

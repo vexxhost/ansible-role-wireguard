@@ -1,0 +1,28 @@
+---
+- name: Gather variables for each operating system
+  include_vars: "{{ ansible_distribution | lower }}.yaml"
+
+- include_tasks: "setup-repo/{{ ansible_distribution | lower }}.yaml"
+
+- name: Install packages
+  become: true
+  package:
+    name: "{{ wireguard_packages }}"
+
+- name: Drop configuration files
+  become: true
+  template:
+    src: wg.conf.j2
+    dest: "/etc/wireguard/{{ item.name }}.conf"
+  loop: "{{ wireguard_links }}"
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: Enable and start services
+  service:
+    name: "wg-quick@{{ item.name }}"
+    state: started
+    enabled: true
+  loop: "{{ wireguard_links }}"
+  loop_control:
+    label: "{{ item.name }}"
