@@ -12,6 +12,8 @@ PostDown = {{ item.post_down }}
 {% for peer in item.peers %}
 [Peer]
 PublicKey = {{ peer.public_key }}
+{% if 'endpoint' in peer %}
 Endpoint = {{ peer.endpoint }}
+{% endif %}
 AllowedIPs = {{ peer.allowed_ips }}
 {% endfor %}
