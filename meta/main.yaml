@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  role_name: wireguard
+  description: Install & configure WireGuard
+  license: Apache
+
+  author: Mohammed Naser
+  company: VEXXHOST, Inc.
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+    - name: EL
+      versions:
+        - 7
