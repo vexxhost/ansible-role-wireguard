@@ -1,0 +1,9 @@
+---
+- name: Restart tunnels
+  become: true
+  service:
+    name: "wg-quick@{{ item.name }}"
+    state: restarted
+  loop: "{{ wireguard_links }}"
+  loop_control:
+    label: "{{ item.name }}"

@@ -23,6 +23,9 @@
   loop: "{{ wireguard_links }}"
   loop_control:
     label: "{{ item.name }}"
+  notify: Restart tunnels
+
+- meta: flush_handlers
 
 - name: Enable and start services
   become: true
