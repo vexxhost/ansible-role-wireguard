@@ -9,6 +9,12 @@
   package:
     name: "{{ wireguard_packages }}"
 
+- name: Create configuration folder
+  become: true
+  file:
+    path: /etc/wireguard
+    state: directory
+
 - name: Drop configuration files
   become: true
   template:
@@ -19,6 +25,7 @@
     label: "{{ item.name }}"
 
 - name: Enable and start services
+  become: true
   service:
     name: "wg-quick@{{ item.name }}"
     state: started
